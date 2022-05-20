@@ -1,3 +1,4 @@
+import { LoadingButton } from '@mui/lab';
 import { Paper, TextField } from '@mui/material';
 import { Container } from '@mui/system';
 import axios from 'axios';
@@ -6,7 +7,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import isAuthenticated from '../utils/isAuthenticated';
 import endpoints from '../utils/endpoints';
 import paths from '../utils/paths';
-import { LoadingButton } from '@mui/lab';
 
 export const Portfolio = () => {
   const navigate = useNavigate();
