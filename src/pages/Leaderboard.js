@@ -1,3 +1,4 @@
+import { LoadingButton } from '@mui/lab';
 import {
   Table,
   TableCell,
@@ -37,21 +38,21 @@ export const Leaderboard = () => {
         <p>You can do this, I believe in you.</p>
       </main>
       <Container>
-        <Paper style={{ border: '1px solid black' }}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>User</TableCell>
-                <TableCell>LP Token</TableCell>
-                <TableCell>Amount</TableCell>
-                <TableCell>Value</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {leaderboard &&
-                leaderboard.map(
-                  ({ email, portfolioValue, token, tokenAmount }) => (
-                    <TableRow>
+        {leaderboard ? (
+          <Paper style={{ border: '1px solid black' }}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>User</TableCell>
+                  <TableCell>LP Token</TableCell>
+                  <TableCell>Amount</TableCell>
+                  <TableCell>Value</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {leaderboard.map(
+                  ({ email, portfolioValue, token, tokenAmount }, i) => (
+                    <TableRow key={i}>
                       <TableCell>{email}</TableCell>
                       <TableCell>{token}</TableCell>
                       <TableCell>{tokenAmount}</TableCell>
@@ -59,9 +60,12 @@ export const Leaderboard = () => {
                     </TableRow>
                   )
                 )}
-            </TableBody>
-          </Table>
-        </Paper>
+              </TableBody>
+            </Table>
+          </Paper>
+        ) : (
+          <LoadingButton loading />
+        )}
       </Container>
       <nav>
         <Link to={paths.home}>Home</Link>

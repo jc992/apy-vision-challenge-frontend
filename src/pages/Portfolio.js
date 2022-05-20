@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import isAuthenticated from '../utils/isAuthenticated';
 import endpoints from '../utils/endpoints';
 import paths from '../utils/paths';
+import { LoadingButton } from '@mui/lab';
 
 export const Portfolio = () => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ export const Portfolio = () => {
         <h2>Welcome to the portfolio!</h2>
         <p>You can do this, I believe in you.</p>
       </main>
-      {info && (
+      {info ? (
         <Container style={{ display: 'flex', justifyContent: 'center' }}>
           <Paper
             style={{
@@ -42,12 +43,14 @@ export const Portfolio = () => {
               gap: 20,
             }}
           >
-            <TextField label="User" readonly value={info.email} />
-            <TextField label="Token" readonly value={info.token} />
-            <TextField label="Amount" readonly value={info.tokenAmount} />
-            <TextField label="Value" readonly value={info.portfolioValue} />
+            <TextField label="User" readOnly value={info.email} />
+            <TextField label="Token" readOnly value={info.token} />
+            <TextField label="Amount" readOnly value={info.tokenAmount} />
+            <TextField label="Value" readOnly value={info.portfolioValue} />
           </Paper>
         </Container>
+      ) : (
+        <LoadingButton loading />
       )}
       <nav>
         <Link to={paths.home}>Home</Link>

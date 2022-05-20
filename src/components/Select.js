@@ -12,7 +12,7 @@ export const Select = ({ label, value, handleSelect, items }) => {
       <InputLabel>{label}</InputLabel>
       <BaseSelect value={value} label={label} onChange={handleSelect}>
         {items &&
-          items.map(({ name }) => <MenuItem value={name}>{name}</MenuItem>)}
+          items.map(({ name }, i) => <MenuItem key={i} value={name}>{name}</MenuItem>)}
       </BaseSelect>
     </FormControl>
   );
