@@ -9,13 +9,17 @@ import {
 import { Container } from '@mui/system';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import endpoints from '../utils/endpoints';
+import isAuthenticated from '../utils/isAuthenticated';
 import paths from '../utils/paths';
 
 export const Leaderboard = () => {
+  const navigate = useNavigate();
   const [leaderboard, setLeaderboard] = useState();
   useEffect(() => {
+    if (!isAuthenticated()) navigate(paths.home);
+
     const fetchLeaderboard = async () => {
       try {
         const { data } = await axios.get(endpoints.leaderboard);

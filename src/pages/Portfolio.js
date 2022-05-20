@@ -2,14 +2,18 @@ import { Paper, TextField } from '@mui/material';
 import { Container } from '@mui/system';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import isAuthenticated from '../utils/isAuthenticated';
 import endpoints from '../utils/endpoints';
 import paths from '../utils/paths';
 
 export const Portfolio = () => {
+  const navigate = useNavigate();
   const [info, setInfo] = useState();
 
   useEffect(() => {
+    if (!isAuthenticated()) navigate(paths.home);
+
     const fetchInfo = async () => {
       const userEmail = localStorage.getItem('user');
       try {

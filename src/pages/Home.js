@@ -1,19 +1,23 @@
 import { Button, Grid, TextField } from '@mui/material';
 import { Container } from '@mui/system';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import login from '../utils/login';
 import paths from '../utils/paths';
 import endpoints from '../utils/endpoints';
 import { Select } from '../components/Select';
+import isAuthenticated from '../utils/isAuthenticated';
 
 export const Home = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [selectedToken, setSelectedToken] = useState('');
   const [tokens, setTokens] = useState([]);
 
   useEffect(() => {
+    if (isAuthenticated()) navigate(paths.portfolio);
+
     const fetchTokens = async () => {
       try {
         const { data } = await axios.get(endpoints.token);
