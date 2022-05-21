@@ -6,6 +6,7 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Button,
 } from '@mui/material';
 import { Container } from '@mui/system';
 import axios from 'axios';
@@ -14,6 +15,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import endpoints from '../utils/endpoints';
 import isAuthenticated from '../utils/isAuthenticated';
 import paths from '../utils/paths';
+import signOut from '../utils/signOut';
 
 export const Leaderboard = () => {
   const navigate = useNavigate();
@@ -34,8 +36,8 @@ export const Leaderboard = () => {
   return (
     <>
       <main>
-        <h2>Welcome to the leaderboard!</h2>
-        <p>You can do this, I believe in you.</p>
+        <h2>Leaderboard!</h2>
+        <p>Find who are the biggest degens!</p>
       </main>
       <Container>
         {leaderboard ? (
@@ -62,15 +64,22 @@ export const Leaderboard = () => {
                 )}
               </TableBody>
             </Table>
+            <Container>
+              <Button>
+                <Link
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                  to={paths.portfolio}
+                >
+                  Portfolio
+                </Link>
+              </Button>
+              <Button onClick={() => signOut()}>Sign out</Button>
+            </Container>
           </Paper>
         ) : (
           <LoadingButton loading />
         )}
       </Container>
-      <nav>
-        <Link to={paths.home}>Home</Link>
-        <Link to={paths.portfolio}>Portfolio</Link>
-      </nav>
     </>
   );
 };

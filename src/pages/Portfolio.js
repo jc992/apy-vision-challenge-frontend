@@ -1,5 +1,5 @@
 import { LoadingButton } from '@mui/lab';
-import { Paper, TextField } from '@mui/material';
+import { Button, Paper, TextField } from '@mui/material';
 import { Container } from '@mui/system';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import isAuthenticated from '../utils/isAuthenticated';
 import endpoints from '../utils/endpoints';
 import paths from '../utils/paths';
+import signOut from '../utils/signOut';
 
 export const Portfolio = () => {
   const navigate = useNavigate();
@@ -30,8 +31,8 @@ export const Portfolio = () => {
   return (
     <>
       <main>
-        <h2>Welcome to the portfolio!</h2>
-        <p>You can do this, I believe in you.</p>
+        <h2>Portfolio!</h2>
+        <p>Check your personal earnings</p>
       </main>
       {info ? (
         <Container style={{ display: 'flex', justifyContent: 'center' }}>
@@ -47,15 +48,22 @@ export const Portfolio = () => {
             <TextField label="Token" readOnly value={info.token} />
             <TextField label="Amount" readOnly value={info.tokenAmount} />
             <TextField label="Value" readOnly value={info.portfolioValue} />
+            <Container>
+              <Button>
+                <Link
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                  to={paths.leaderboard}
+                >
+                  Leaderboard
+                </Link>
+              </Button>
+              <Button onClick={() => signOut()}>Sign out</Button>
+            </Container>
           </Paper>
         </Container>
       ) : (
         <LoadingButton loading />
       )}
-      <nav>
-        <Link to={paths.home}>Home</Link>
-        <Link to={paths.leaderboard}>Leaderboard</Link>
-      </nav>
     </>
   );
 };
