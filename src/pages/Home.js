@@ -11,9 +11,9 @@ import isAuthenticated from '../utils/isAuthenticated';
 
 export const Home = () => {
   const navigate = useNavigate();
-  const [signUpEmail, setSignUpEmail] = useState('');
-  const [signInEmail, setSignInEmail] = useState('');
-  const [selectedToken, setSelectedToken] = useState('');
+  const [signUpEmail, setSignUpEmail] = useState();
+  const [signInEmail, setSignInEmail] = useState();
+  const [selectedToken, setSelectedToken] = useState();
   const [tokens, setTokens] = useState([]);
   const [error, setError] = useState();
 
@@ -92,7 +92,7 @@ export const Home = () => {
               items={tokens}
               handleSelect={handleSelect}
             />
-            <Button variant="outlined" onClick={handleSignUp}>
+            <Button disabled={!selectedToken || !signUpEmail} variant="outlined" onClick={handleSignUp}>
               Create Account
             </Button>
           </Container>
