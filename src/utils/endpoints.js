@@ -1,4 +1,4 @@
-const api = 'http://localhost:3001/api';
+const api = process.env.REACT_APP_API;
 export default {
   user: `${api}/user/`,
   leaderboard: `${api}/user/`,
