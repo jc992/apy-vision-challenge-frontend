@@ -58,7 +58,7 @@ export const Leaderboard = () => {
                       <TableCell>{email}</TableCell>
                       <TableCell>{token}</TableCell>
                       <TableCell>{tokenAmount}</TableCell>
-                      <TableCell>{portfolioValue}</TableCell>
+                      <TableCell>{portfolioValue.toFixed(2)}</TableCell>
                     </TableRow>
                   )
                 )}

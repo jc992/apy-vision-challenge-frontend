@@ -1,4 +1,4 @@
-import { Button, FormLabel, Grid, TextField } from '@mui/material';
+import { Button, FormLabel, Grid, TextField, Typography } from '@mui/material';
 import { Container } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +15,7 @@ export const Home = () => {
   const [signInEmail, setSignInEmail] = useState('');
   const [selectedToken, setSelectedToken] = useState('');
   const [tokens, setTokens] = useState([]);
+  const [error, setError] = useState();
 
   useEffect(() => {
     if (isAuthenticated()) navigate(paths.portfolio);
@@ -42,12 +43,12 @@ export const Home = () => {
   };
 
   const handleAuth = async () => {
-    console.log({ signInEmail });
     try {
       const response = await axios.get(endpoints.user.concat(signInEmail));
-      console.log(response);
       login(response, signInEmail);
+      navigate(paths.portfolio);
     } catch (err) {
+      setError('User doesn´t exist!');
       console.error(err);
     }
   };
@@ -59,7 +60,9 @@ export const Home = () => {
         token: selectedToken,
       });
       login(response, signUpEmail);
+      navigate(paths.portfolio, { state: { signedUp: true } });
     } catch (err) {
+      setError('User already exists!');
       console.error(err);
     }
   };
@@ -70,6 +73,7 @@ export const Home = () => {
         <h2>Welcome to the Apy.Vision giveaway!</h2>
         <p>Choose an LP token in which you wish to invest $100.000!</p>
       </main>
+      {error && <Typography color="red">{error}</Typography>}
       <Grid container spacing={2}>
         <Grid item md={6} sm={12}>
           <Container
